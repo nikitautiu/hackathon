@@ -1,0 +1,11 @@
+
+
+{% if index_event_list %}
+    <ul>
+    {% for event in index_event_list %}
+        <li><a href="{% url 'events:detail' event.id %}">{{ event.title }} -- {{ event.start_date|date }} </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
