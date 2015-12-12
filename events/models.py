@@ -19,7 +19,7 @@ class Event(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True) # e null daca sepecifica numai data de inceput
     description = models.CharField(max_length=256)
-    likes = models.IntegerField()
+    likes = models.IntegerField(default=0)
     host = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def is_upcoming(self):
