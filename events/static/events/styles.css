@@ -1,0 +1,75 @@
+div {
+	font-size: 25px;
+	font-family:Comic;
+	text-align:center;
+}
+a{
+	text-decoration:none;	
+}
+
+a:visited {
+	color: #006400;
+}
+
+.titlu1{
+	float: left;
+}
+.titlu2{
+	float: right;
+}
+.leftt{
+	float:left;
+	width: 25%;
+	font-size: 12px;
+	position:absolute;
+	
+}
+.rightt{
+	width: 70%;
+	float: right;
+	border-left: 3px solid #006400;
+}
+
+.event {
+	padding: 40px;
+	text-align: center;
+}
+
+body {
+	background-color: #B8B8B8;
+	margin: 50px;
+	float: center;
+}
+
+
+#titlu {
+	color: #006400;
+	float: left;
+	text-shadow: 2px 2px #32CD32;
+}
+
+#cautare{
+	color: #006400;
+	float: right;
+	text-shadow: 2px 2px #32CD32;
+}
+
+#cap{
+	padding: 10px 50px 100px 10px;
+	margin: 50px 90px 20px 120px;	
+}
+#adauga{
+	color: #006400;
+	text-shadow: 2px 2px #32CD32;
+	text-align:center;
+	
+}
+.news{
+	text-align: center;
+	margin: 50px 150px 20px 150px;
+	color: #006400;
+	border-style: solid;
+	border-color: #696969;
+	padding: 5px 50px 20px 50px;
+	border-radius: 10px 10px 10px 10px;
+}

@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout, login
 
 from .models import Event, Host
-from .forms import EventForm
+from .forms import EventForm, SearchForm
 # Create your views here.
 
 class IndexView(generic.View):
@@ -45,7 +45,7 @@ class IndexView(generic.View):
         if 'upcoming' in request.GET:
             list_type = 'upcoming'
 
-        context['index_event_list'] = self._get_list(list_type)
+        context['event_list'] = self._get_list(list_type)
         context['list_type'] = list_type
         return render(request, 'events/index.html', context)
 
@@ -55,6 +55,7 @@ class EventView(generic.DetailView):
     template_name = 'events/detail.html'
 
 
+@login_required
 def add_event(request):
     form = EventForm(request.POST)
     
@@ -69,8 +70,6 @@ def add_event(request):
                 start_date=start_date, end_date=end_date, host=request.user)
 
             new_event.save()
-            import pdb
-            pdb.set_trace()
             messages.add_message(request, messages.SUCCESS, 'Eveniment adaugat cu success!')
             return redirect('events:detail', pk=new_event.id)
     else:
@@ -78,3 +77,19 @@ def add_event(request):
     return render(request, 'events/add.html', {'form': form})
 
 
+@login_required
+def logout(request):
+    logout(request)
+    # Redirect to a success page.
+
+
+class SearchView(generic.ListView):
+    template_name = 'events/search.html'
+    context_object_name = 'event_list'
+
+    def get_queryset(self):
+        form = SearchForm(self.request.GET)
+        if form.is_valid():
+            pass
+        else:
+            return None

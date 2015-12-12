@@ -15,11 +15,26 @@ class Host(models.Model):
 
 
 class Event(models.Model):
+    CATEGORIES ={
+        'pa': 'Party',
+        'fo': 'Gastronomie',
+        'sp': 'Sport',
+        'ed': 'Educativ',
+        're': 'Religios',
+        'ba': 'Bautura',
+        'mu': 'Muzical',
+        'fi': 'Film',
+    }
+
+
     title = models.CharField(max_length=50)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True) # e null daca sepecifica numai data de inceput
     description = models.CharField(max_length=256)
     likes = models.IntegerField(default=0)
+
+    catergory = models.CharField(max_length=2,
+                                 choices=CATEGORIES.items())
     host = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def is_upcoming(self):

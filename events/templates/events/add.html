@@ -1,5 +1,17 @@
-<form action="{% url 'events:add' %}" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="buton"> </input> 
-</form>
+{% extends 'events/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+    Adaugare eveniment
+{% endblock %}
+
+{% block content %}
+
+    <form role="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons submit='Submit' reset="Cancel" %}{% endbuttons %}
+    </form>
+
+{% endblock %}
