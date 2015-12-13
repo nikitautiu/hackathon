@@ -81,16 +81,16 @@ def add_event(request):
 
 
 def search(request):
-    form = SearchForm(request.GET)
+    form = SearchForm(request.GET, initial={'is_event': True})
     event_list = []
     if form.is_valid():
         keyword = form.cleaned_data['keyword']
-        is_event = form.cleaned_data['is_event']
+        is_offer = form.cleaned_data['is_offer']
         from_date = form.cleaned_data['from_date']
         category = form.cleaned_data['category']
         sort_criteria = form.cleaned_data['sort_criteria']
 
-        event_list = search_events(keyword=keyword, is_event=is_event, 
+        event_list = search_events(keyword=keyword, is_offer=is_offer, 
             from_date=from_date, category=category, sort_criteria=sort_criteria)
     return render(request, 'events/search.html', {'form': form, 'event_list': event_list})
 

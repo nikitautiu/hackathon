@@ -49,14 +49,13 @@ class SearchForm(forms.Form):
         error_messages={'required': 'Trebuie scrisa o data!',
                         'invalid': 'Introduceti o data valida!'})
     category = forms.ChoiceField(label='Categorie', required=False,
-        choices=Event.CATEGORIES.items(), 
+        choices=([('', 'All')] + list(Event.CATEGORIES.items())), initial='', 
         error_messages={'required': 'Trebuie data o categorie!',
                         'invalid': 'Introduceti o categorie valida!'})
-    is_event = forms.BooleanField(label='Eveniment(oferta daca nu)', required=False,
-        initial=True,
+    is_offer = forms.BooleanField(label='Doar oferte', required=False,
         error_messages={'required': 'Trebuie specificat!',
                         'invalid': 'True sau False!'})
     sort_criteria = forms.ChoiceField(label='Storta dupa', required=False,
-        choices=SEARCH_CRITERIAS.items(), 
+        choices=([('', 'Nimic')] + list(SEARCH_CRITERIAS.items())), 
         error_messages={'invalid_choice': 'Introduceti un criteriu valid!'})
 

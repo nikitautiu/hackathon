@@ -7,11 +7,24 @@
 {% endblock %}
 
 {% block content %}
-
-    <form role="form" method="get">
+<div class="row">
+    <form class="col-md-3" role="form" method="get">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons submit='Submit' reset="Cancel" %}{% endbuttons %}
     </form>
 
+    <div class="container">
+    <div class="col-md-8">
+    {% for event in event_list %}
+        <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'events:detail' event.id %}"><h2>{{ event.title }}</h2></a>
+            <p>{{ event.description }}</p>
+        </div>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+<div>
 {% endblock %}
