@@ -44,7 +44,7 @@ SEARCH_CRITERIAS = {
 
 class SearchForm(forms.Form):
     keyword = forms.CharField(label='Cautare', max_length=50, required=False)
-    from_date = forms.DateTimeField(label='Incepe dupa', 
+    from_date = forms.DateTimeField(label='Incepe dupa', required=False,
         widget=forms.TextInput(attrs={'placeholder': 'aaaa-ll-zz [hh:mm]'}),
         error_messages={'required': 'Trebuie scrisa o data!',
                         'invalid': 'Introduceti o data valida!'})

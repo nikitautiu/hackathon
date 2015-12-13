@@ -81,7 +81,7 @@ def add_event(request):
 
 
 def search(request):
-    form = EventForm(request.GET)
+    form = SearchForm(request.GET)
     event_list = []
     if form.is_valid():
         keyword = form.cleaned_data['keyword']
