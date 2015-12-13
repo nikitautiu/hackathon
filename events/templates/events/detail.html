@@ -8,9 +8,16 @@
 
 {% block content %}
 
-    <p><b>{{ event.start_date|date:"D. d N Y H:i" }} to {{ event.end_date|date:"D. d N Y H:i" }}</b></p>
+<div class="row" style="margin-bottom: 10px">
+    <p class="col-md-10"><b>{{ event.start_date|date:"D. d N Y H:i" }} to {{ event.end_date|date:"D. d N Y H:i" }}</b></p>
 
-<div class="jumbotron">
+{% if event.map_url %}
+    <a class="col-md-2" style="text-align: right" href= {{event.map_url}} ><button class="btn btn-success">Location</button></a>
+
+{% endif %}
+</div>
+
+<div class="well">
     <p>{{ event.description }}</p>
     <p>Category: {{ event.get_category_display }}</p>
     <p>Likes: {{ event.likes }} </p>
