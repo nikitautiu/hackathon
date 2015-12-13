@@ -35,6 +35,7 @@ class Event(models.Model):
                                  choices=CATEGORIES.items())
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     is_event = models.BooleanField(default=True)
+    map_url = models.URLField(null=True)
 
     def is_upcoming(self):
         return (self.start_date >= timezone.now() and 

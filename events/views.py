@@ -67,10 +67,11 @@ def add_event(request):
             end_date = form.cleaned_data['end_date']
             category = form.cleaned_data['category']
             is_event = form.cleaned_data['is_event']
+            map_url = form.cleaned_data['map_url']
 
             new_event = Event(title=title, description=description, 
                 start_date=start_date, end_date=end_date, host=request.user,
-                category=category)
+                category=category, map_url=map_url)
 
             new_event.save()
             messages.add_message(request, messages.SUCCESS, 'Eveniment adaugat cu success!')

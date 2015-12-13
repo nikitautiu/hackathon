@@ -36,6 +36,9 @@ class EventForm(forms.Form):
         error_messages={'required': 'Trebuie specificat!',
                         'invalid': 'True sau False!'})
 
+    map_url = forms.URLField(label='Url locatie(Google Maps)', required=False,
+        error_messages={'invalid': 'Invalid location'})
+
 SEARCH_CRITERIAS = {
     'dhl' : 'Data(De la mare la mic)',
     'dlh' : 'Data(De la mic la mare)',
