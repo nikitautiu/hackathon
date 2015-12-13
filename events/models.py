@@ -32,8 +32,7 @@ class Event(models.Model):
     end_date = models.DateTimeField(null=True) # e null daca sepecifica numai data de inceput
     description = models.CharField(max_length=256)
     likes = models.IntegerField(default=0)
-
-    catergory = models.CharField(max_length=2,
+    category = models.CharField(max_length=2,
                                  choices=CATEGORIES.items())
     host = models.ForeignKey(User, on_delete=models.CASCADE)
 

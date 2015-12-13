@@ -65,9 +65,11 @@ def add_event(request):
             description = form.cleaned_data['description']
             start_date = form.cleaned_data['start_date']
             end_date = form.cleaned_data['end_date']
+            category = form.cleaned_data['category']
 
             new_event = Event(title=title, description=description, 
-                start_date=start_date, end_date=end_date, host=request.user)
+                start_date=start_date, end_date=end_date, host=request.user,
+                category=category)
 
             new_event.save()
             messages.add_message(request, messages.SUCCESS, 'Eveniment adaugat cu success!')
