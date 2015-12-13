@@ -12,6 +12,7 @@ class EventForm(forms.Form):
     title = forms.CharField(label='Titlu', max_length=50)
 
     description = forms.CharField(label='Descriere', max_length=256,
+        widget=forms.Textarea(attrs = {'rows': 3} ),
         error_messages={'required': 'Trebuie scrisa o descriere!',
                         'invalid': 'Introduceti o descriere valida!'})
 
@@ -28,8 +29,34 @@ class EventForm(forms.Form):
     category = forms.ChoiceField(label='Categorie',
         choices=Event.CATEGORIES.items(), 
         error_messages={'required': 'Trebuie data o categorie!',
-                        'invalid': 'Introduceti o categorie valida!'})
+                        'invalid_choice': 'Introduceti o categorie valida!'})
+
+    is_event = forms.BooleanField(label='Eveniment(oferta daca nu)',
+        initial=True,
+        error_messages={'required': 'Trebuie specificat!',
+                        'invalid': 'True sau False!'})
+
+SEARCH_CRITERIAS = {
+    'dhl' : 'Data(De la mare la mic)',
+    'dlh' : 'Data(De la mic la mare)',
+
+}
 
 class SearchForm(forms.Form):
-    keyword = forms.CharField(label='Cautare', max_length=50)
+    keyword = forms.CharField(label='Cautare', max_length=50, required=False)
+    from_date = forms.DateTimeField(label='Incepe dupa', 
+        widget=forms.TextInput(attrs={'placeholder': 'aaaa-ll-zz [hh:mm]'}),
+        error_messages={'required': 'Trebuie scrisa o data!',
+                        'invalid': 'Introduceti o data valida!'})
+    category = forms.ChoiceField(label='Categorie', required=False,
+        choices=Event.CATEGORIES.items(), 
+        error_messages={'required': 'Trebuie data o categorie!',
+                        'invalid': 'Introduceti o categorie valida!'})
+    is_event = forms.BooleanField(label='Eveniment(oferta daca nu)', required=False,
+        initial=True,
+        error_messages={'required': 'Trebuie specificat!',
+                        'invalid': 'True sau False!'})
+    sort_criteria = forms.ChoiceField(label='Storta dupa', required=False,
+        choices=SEARCH_CRITERIAS.items(), 
+        error_messages={'invalid_choice': 'Introduceti un criteriu valid!'})
 

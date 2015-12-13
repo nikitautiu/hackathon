@@ -1,7 +1,19 @@
-<ul>
-    <li>{{ event.title }}</li>
-    <li>{{ event.description }}</li>
-    <li>{{ event.start_date }} --- {{ event.end_date }} </li>
-    <li>{{ event.get_category_display }}</li>
-    <li>{{ event.likes }} </li>
-</ul>
+{% extends 'events/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+    {{ event.title }}
+{% endblock %}
+
+{% block content %}
+
+    <p><b>{{ event.start_date|date:"D. d N Y H:i" }} to {{ event.end_date|date:"D. d N Y H:i" }}</b></p>
+
+<div class="jumbotron">
+    <p>{{ event.description }}</p>
+    <p>Category: {{ event.get_category_display }}</p>
+    <p>Likes: {{ event.likes }} </p>
+</div>
+
+{% endblock %}

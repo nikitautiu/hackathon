@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout, login
 
-from .models import Event, Host
+from .models import Event, Host, search_events
 from .forms import EventForm, SearchForm
 # Create your views here.
 
@@ -66,6 +66,7 @@ def add_event(request):
             start_date = form.cleaned_data['start_date']
             end_date = form.cleaned_data['end_date']
             category = form.cleaned_data['category']
+            is_event = form.cleaned_data['is_event']
 
             new_event = Event(title=title, description=description, 
                 start_date=start_date, end_date=end_date, host=request.user,
@@ -78,6 +79,20 @@ def add_event(request):
         form = EventForm()
     return render(request, 'events/add.html', {'form': form})
 
+
+def search(request):
+    form = EventForm(request.GET)
+    event_list = []
+    if form.is_valid():
+        keyword = form.cleaned_data['keyword']
+        is_event = form.cleaned_data['is_event']
+        from_date = form.cleaned_data['from_date']
+        category = form.cleaned_data['category']
+        sort_criteria = form.cleaned_data['sort_criteria']
+
+        event_list = search_events(keyword=keyword, is_event=is_event, 
+            from_date=from_date, category=category, sort_criteria=sort_criteria)
+    return render(request, 'events/search.html', {'form': form, 'event_list': event_list})
 
 @login_required
 def logout(request):

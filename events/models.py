@@ -26,7 +26,6 @@ class Event(models.Model):
         'fi': 'Film',
     }
 
-
     title = models.CharField(max_length=50)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True) # e null daca sepecifica numai data de inceput
@@ -35,6 +34,7 @@ class Event(models.Model):
     category = models.CharField(max_length=2,
                                  choices=CATEGORIES.items())
     host = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_event = models.BooleanField(default=True)
 
     def is_upcoming(self):
         return (self.start_date >= timezone.now() and 
@@ -45,4 +45,21 @@ class Event(models.Model):
     has_not_ended.boolean = True
 
 
+def search_events(keyword=None, from_date=None, category=None, 
+    is_event=True, sort_criteria=None):
+    queryset = Event.objects
+    if keyword is not None:
+        queryset = queryset.filter(models.Q(description__contains(keyword)) | 
+            models.Q(title__contains(keyword)) | models.Q(category__exact(keyword)))
+    if from_date is not None:
+        queryset = queryset.filter(end_date__gt=from_date)
+    if category is not None:
+        queryset = queryset.filter(category__exact=category)
+    if sort_criteria is not None:
+        if sort_criteria == 'dhl':
+            sort_string = '-start_date'
+        elif sort_criteria == 'dlh':
+            sort_string = 'start_date'
+        queryset = queryset.order_by(sort_string)
+    return queryset
 

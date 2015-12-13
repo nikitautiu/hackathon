@@ -1,33 +1,34 @@
-{% load staticfiles %}
+{% extends 'events/base.html' %}
 
-<!DOCTYPE html>
+{% load bootstrap3 %}
+
+{% block title %}
+    EvRo - Event Rounder
+{% endblock %}
+
+{% block content %}
+
 <html>
     <head>
         <title>Titlu</title>
-        <link rel="stylesheet" href="{% static 'events/styles.css' %}">
+        
     </head>
     <body>
-    <div>
-    <h1 id="cap">
-        <a id="titlu" href="{% url 'events:index' %}">Titlu</a>
-        <a href="search3.html" id="cautare">Cauta</a> 
-    </h1>
-    <hr color="#006400" width="90%" size="10px">
-    </div>
-    <br>
     {% if list_type == "popular" %} 
         <h2> Cele mai populare  evenimente (click aici pt <a href="{% url 'events:index' %}?upcoming">recente</a>)</h2>
     {% elif list_type == "upcoming" %}
         <h2> Cele mai recente  evenimente (click aici pt <a href="{% url 'events:index' %}">populare</a>)</h2>
     {% endif %}
-    <div>
-    {% for event in event_list %}
-    <div class="news">
-        <a href="{% url 'events:detail' event.id %}"><h2>{{ event.title }}</h2></a>
-        <p>{{ event.description }}</p>
-    </div>
-    {% endfor %}
 
+    <div class="container"><div class="row">
+    {% for event in event_list %}
+        <div class="col-md-4">
+            <a href="{% url 'events:detail' event.id %}"><h2>{{ event.title }}</h2></a>
+            <p>{{ event.description }}</p>
+        </div>
+    {% endfor %}
+    </div></div>
     </body>
 </html>
-    
+
+{% endblock %}
